@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useUserStore } from "../store/useUserStore";
 
 const apiInstance = axios.create({
     baseURL: "https://api.kitek-pg.ru/api/feedback/",
@@ -6,6 +7,15 @@ const apiInstance = axios.create({
         "Content-Type": "application/json",
         "Accept": "application/json"
     },
+})
+
+apiInstance.interceptors.request.use((config) => {
+    const { session } = useUserStore.getState()
+    if (session?.token) {
+        config.headers.Authorization = `Bearer ${session.token}`
+    }
+
+    return config
 })
 
 const registerUser = async (user) => {
@@ -23,7 +33,7 @@ const getMessages = async () => {
     return res
 }
 
-const sendMessages = async () => {
+const sendMessages = async (message) => {
     const res = await apiInstance.post("/messages", message)
     return res
 }
@@ -32,5 +42,5 @@ export const api = {
     registerUser,
     loginUser,
     getMessages,
-    sendMessages,
+    sendMessages
 }

@@ -2,7 +2,8 @@ import { api } from '../api/api'
 import Button from './Button'
 import TextArea from './TextArea'
 
-const MessageField = async (e) => {
+const MessageField = () => {
+    const handleSubmit = async (e) => {
     e.preventDefault()
 
     const message = {
@@ -14,23 +15,25 @@ const MessageField = async (e) => {
     } catch (error) {
         console.error(error)
     }
-    return (
-        <div className="create-message-section">
-            <div className="container">
-                <div className="create-message-card">
-                    <h2 className="create-message-title">Создать сообщение</h2>
-                    <form
-                        className="create-message-form">
-                        <TextArea
-                            name="content"
-                            placeholder="Поделитесь мнением..."
-                        />
-                        <Button>Отправить</Button>
-                    </form>
-                </div>
+}
+
+return (
+    <div className="create-message-section">
+        <div className="container">
+            <div className="create-message-card">
+                <h2 className="create-message-title">Создать сообщение</h2>
+                <form onSubmit={handleSubmit}
+                    className="create-message-form">
+                    <TextArea
+                        name="content"
+                        placeholder="Поделитесь мнением..."
+                    />
+                    <Button>Отправить</Button>
+                </form>
             </div>
         </div>
-    )
+    </div>
+)
 }
 
 export default MessageField
