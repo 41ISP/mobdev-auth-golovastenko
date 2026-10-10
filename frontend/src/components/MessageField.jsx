@@ -1,7 +1,19 @@
+import { api } from '../api/api'
 import Button from './Button'
 import TextArea from './TextArea'
 
-const MessageField = () => {
+const MessageField = async (e) => {
+    e.preventDefault()
+
+    const message = {
+        content: e.target.content.value
+    }
+
+    try {
+        await api.sendMessages(message)
+    } catch (error) {
+        console.error(error)
+    }
     return (
         <div className="create-message-section">
             <div className="container">

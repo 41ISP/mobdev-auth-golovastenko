@@ -19,7 +19,7 @@ createRoot(document.getElementById("root")).render(
                     <Route path="signin" element={<SignIn />} />
                     <Route path="signup" element={<SignUp />} />
                 </Route>
-                <Route element={<Logout />} />
+                <Route path="/logout" element={<Logout />} />
             </Routes>
         </BrowserRouter>
     </StrictMode>,

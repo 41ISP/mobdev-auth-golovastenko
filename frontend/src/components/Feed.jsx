@@ -1,8 +1,13 @@
+import { useEffect } from 'react'
 import MessageCard from './MessageCard'
-import { useState } from 'react'
+import { useMessageStore } from '../store/useMessageStore'
 
 const Feed = ({ title = 'Сообщения' }) => {
-    const [messages, setMessages] = useState([])
+    const [messages, getMessages] = useMessageStore()
+
+    useEffect(() => {
+        getMessages()
+    }, [])
 
     return (
         <>
